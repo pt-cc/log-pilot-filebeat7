@@ -34,7 +34,7 @@ Query the logs:
 Quickstart
 ==========
 
-### Docker built
+### Docker build
 ```
 docker build -t log-pilot:latest -f Dockerfile.filebeat .
 ```
