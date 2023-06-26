@@ -34,15 +34,26 @@ Query the logs:
 Quickstart
 ==========
 
+### Docker built
+```
+docker build -t log-pilot:latest -f Dockerfile.filebeat .
+```
+
 ### Run pilot
 
 ```
-docker run --rm -it \
+docker run -d --rm -it \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v /etc/localtime:/etc/localtime \
     -v /:/host:ro \
+    -e PILOT_TYPE=filebeat \
+    -e LOGGING_OUTPUT=elasticsearch \
+    -e ELASTICSEARCH_HOSTS=172.19.13.222:9200 \
+    -e ELASTICSEARCH_BULK_MAX_SIZE=1000 \
+    -e ELASTICSEARCH_WORKER=3 \
+    -e FILEBEAT_MAX_PROCS=4 \
     --cap-add SYS_ADMIN \
-    registry.cn-hangzhou.aliyuncs.com/acs/log-pilot:0.9.5-filebeat
+    log-pilot:latest
 ```
 
 ### Run applications whose logs need to be collected
