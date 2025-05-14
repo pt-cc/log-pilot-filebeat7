@@ -67,7 +67,7 @@ cat >> $FILEBEAT_CONFIG << EOF
 $(base)
 output.elasticsearch:
     hosts: [$ELASTICSEARCH_HOSTS]
-    index: ${ELASTICSEARCH_INDEX:-filebeat}_%{+yyyy_MM}
+    index: ${ELASTICSEARCH_INDEX:-filebeat}_%{+yyyy.MM.dd}
     ilm.rollover_alias: ${ELASTICSEARCH_INDEX:-filebeat}
     ilm.enabled: true
     ${ELASTICSEARCH_SCHEME:+protocol: ${ELASTICSEARCH_SCHEME}}
