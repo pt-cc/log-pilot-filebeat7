@@ -67,7 +67,7 @@ cat >> $FILEBEAT_CONFIG << EOF
 $(base)
 output.elasticsearch:
     hosts: [$ELASTICSEARCH_HOSTS]
-    index: ${ELASTICSEARCH_INDEX:-filebeat}_%{+yyyy.MM.dd}
+    index: ${ELASTICSEARCH_INDEX:-filebeat}-%{+yyyy.MM.dd}
     ilm.rollover_alias: ${ELASTICSEARCH_INDEX:-filebeat}
     ilm.enabled: true
     ${ELASTICSEARCH_SCHEME:+protocol: ${ELASTICSEARCH_SCHEME}}
@@ -110,7 +110,7 @@ cat >> $FILEBEAT_CONFIG << EOF
 $(base)
 output.logstash:
     hosts: ["$LOGSTASH_HOST:$LOGSTASH_PORT"]
-    index: ${FILEBEAT_INDEX:-filebeat}_%{+yyyy_MM}
+    index: ${FILEBEAT_INDEX:-filebeat}-%{+yyyy_MM}
     ${LOGSTASH_WORKER:+worker: ${LOGSTASH_WORKER}}
     ${LOGSTASH_LOADBALANCE:+loadbalance: ${LOGSTASH_LOADBALANCE}}
     ${LOGSTASH_BULK_MAX_SIZE:+bulk_max_size: ${LOGSTASH_BULK_MAX_SIZE}}
